@@ -1,8 +1,6 @@
-#include "ergodox.h"
+#include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
-#include "sendchar.h"
-#include "virtser.h"
 
 #define BASE 0 // default layer
 #define SYMB 1 // symbols
@@ -26,7 +24,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | App  | LGui |       | Alt  |Ctrl/Esc|
  *                               ,--------|------|------|       |------+--------+--------.
  *                               |        |      | Home |       | PgUp |        |        |
- *                               | Space  |Backsp|------|       |------|  Tab   |Enter/L1|
+ *                               | Space  |Backsp|------|       |------| Space  |Enter/L1|
  *                               |        |ace   | End  |       | PgDn |        |        |
  *                               `----------------------'       `------------------------'
  */
@@ -49,11 +47,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         TG(SYMB),    KC_Y,   KC_U,               KC_I,     KC_O,    KC_P,    KC_NO,
                      KC_H,   KC_J,               KC_K,     KC_L,    KC_SCLN, KC_QUOT,
         MEH_T(KC_NO),KC_N,   KC_M,               KC_COMM,  KC_DOT,  KC_SLSH, KC_RSFT,
-                             LT(MOUS, KC_LANG1), KC_KANA,  KC_LBRC, KC_RBRC, MO(SYMB),
+                             LT(MOUS, KC_LANG1), KC_RGUI,  KC_LBRC, KC_RBRC, MO(SYMB),
 
         KC_LALT, CTL_T(KC_ESC),
         KC_PGUP,
-        KC_PGDN, KC_TAB,        LT(SYMB, KC_ENT)
+        KC_PGDN, KC_SPC,        LT(SYMB, KC_ENT)
     ),
 /* Keymap 1: Symbol Layer
  *
@@ -154,71 +152,46 @@ const uint16_t PROGMEM fn_actions[] = {
     [1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
 
-uint8_t chord[4] = {0,0,0,0};
-uint8_t pressed_count = 0;
-
-void send_chord(void)
-{
-  for(uint8_t i = 0; i < 4; i++)
-  {
-    if(chord[i])
-      virtser_send(chord[i]);
-  }
-  virtser_send(0);
-}
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record)
-{
-  // We need to track keypresses in all modes, in case the user
-  // changes mode whilst pressing other keys.
-  if (record->event.pressed)
-    pressed_count++;
-  else
-    pressed_count--;
-  return true;
-}
-
 const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
 {
   // MACRODOWN only works in this function
-
-  if (record->event.pressed) {
-    uint8_t grp = (id & GRPMASK) >> 6;
-    chord[grp] |= id;
-  }
-  else {
-    if (pressed_count == 0) {
-      send_chord();
-      chord[0] = chord[1] = chord[2] = chord[3] = 0;
-    }
+  switch(id) {
+    case 0:
+      if (record->event.pressed) {
+        register_code(KC_RSFT);
+      } else {
+        unregister_code(KC_RSFT);
+      }
+      break;
   }
   return MACRO_NONE;
 };
 
 // Runs just one time when the keyboard initializes.
 void matrix_init_user(void) {
+
 };
 
 // Runs constantly in the background, in a loop.
 void matrix_scan_user(void) {
 
-    uint8_t layer = biton32(layer_state);
+  uint8_t layer = biton32(layer_state);
 
-    ergodox_board_led_off();
-    ergodox_right_led_1_off();
-    ergodox_right_led_2_off();
-    ergodox_right_led_3_off();
-    switch (layer) {
-      // TODO: Make this relevant to the ErgoDox EZ.
-        case 1:
-            ergodox_right_led_1_on();
-            break;
-        case 2:
-            ergodox_right_led_2_on();
-            break;
-        default:
-            // none
-            break;
-    }
+  ergodox_board_led_off();
+  ergodox_right_led_1_off();
+  ergodox_right_led_2_off();
+  ergodox_right_led_3_off();
+  switch (layer) {
+    // TODO: Make this relevant to the ErgoDox EZ.
+    case SYMB:
+      ergodox_right_led_1_on();
+      break;
+    case MOUS:
+      ergodox_right_led_2_on();
+      break;
+    default:
+      // none
+      break;
+  }
 
 };
