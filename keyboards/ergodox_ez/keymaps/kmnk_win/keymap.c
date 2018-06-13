@@ -27,7 +27,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |--------+------+------+------+------+------| Hyper|           | Meh  |------+------+------+------+------+--------|
  * | LShift |Z/Ctrl|   X  |   C  |   V  |   B  |      |           |      |   N  |   M  |   ,  |   .  |   /  | RShift |
  * `-+------+------+------+------+------+-------------'           `-------------+------+------+------+------+------+-'
- *   |Grv/L1| LGUI |  L3  | LAlt | MHEN |                                       | HENK | KANA |   [  |   ]  | ~L1  |
+ *   |Grv/L1| LGUI | LAlt |  L3  | MHEN |                                       | HENK | KANA |   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,---------------.
  *                                        | App  | LGui |       | Alt  |Ctrl/Esc|
@@ -45,7 +45,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,         KC_Q,        KC_W,    KC_E,    KC_R,    KC_T, TG(SYMB),
         KC_CAPS,        KC_A,        KC_S,    KC_D,    KC_F,    KC_G,
         KC_LSFT,        CTL_T(KC_Z), KC_X,    KC_C,    KC_V,    KC_B, ALL_T(KC_NO),
-        LT(SYMB,KC_GRV),KC_LGUI,     MO(WIND),KC_LALT, KC_MHEN,
+        LT(SYMB,KC_GRV),KC_LGUI,     KC_LALT, MO(WIND),KC_MHEN,
                                               ALT_T(KC_APP),  KC_LGUI,
                                                               KC_HOME,
                                                KC_SPC,KC_BSPC,KC_END,
@@ -145,20 +145,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [WIND] = LAYOUT_ergodox(
        // left hand
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, LCTL(KC_INS), LSFT(KC_INS), KC_TRNS, KC_TRNS,
-       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-                                           KC_TRNS, KC_TRNS,
-                                                    KC_TRNS,
-                                  KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS, LCTL(KC_1), LCTL(KC_2), LCTL(KC_3),   LCTL(KC_4),   LCTL(KC_5), KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,      KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,      KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_TRNS,    LCTL(KC_INS), LSFT(KC_INS), KC_TRNS,    KC_TRNS,
+       KC_TRNS, KC_TRNS,    KC_TRNS,    KC_TRNS,      KC_TRNS,
+                                                                       KC_TRNS, KC_TRNS,
+                                                                                KC_TRNS,
+                                                              KC_TRNS, KC_TRNS, KC_TRNS,
        // right hand
-       KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, LALT(KC_1), LALT(KC_2), LALT(KC_3), KC_TRNS, KC_TRNS,
-                 KC_TRNS, LALT(KC_4), LALT(KC_5), LALT(KC_6), KC_TRNS, KC_TRNS,
-       KC_TRNS,  KC_TRNS, LALT(KC_7), LALT(KC_8), LALT(KC_9), KC_TRNS, KC_TRNS,
-                          KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+       KC_TRNS,  LCTL(KC_6), LCTL(KC_7), LCTL(KC_8), LCTL(KC_9), LCTL(KC_0), KC_TRNS,
+       KC_TRNS,  KC_TRNS,    LALT(KC_1), LALT(KC_2), LALT(KC_3), KC_TRNS,    KC_TRNS,
+                 KC_TRNS,    LALT(KC_4), LALT(KC_5), LALT(KC_6), KC_TRNS,    KC_TRNS,
+       KC_TRNS,  KC_TRNS,    LALT(KC_7), LALT(KC_8), LALT(KC_9), KC_TRNS,    KC_TRNS,
+                             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS,
        KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS
