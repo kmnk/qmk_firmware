@@ -24,13 +24,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                        | App  | LGui |       | Alt  |Ctrl/Esc|
  *                               ,--------|------|------|       |------+--------+--------.
  *                               |        |      | Home |       | PgUp |        |        |
- *                               | Space  |Backsp|------|       |------| Space  |Enter/L1|
+ *                               | Space  |Backsp|------|       |------| Space  |Enter/L2|
  *                               |        |ace   | End  |       | PgDn |        |        |
  *                               `----------------------'       `------------------------'
  */
 // If it accepts an argument (i.e, is a function), it doesn't need KC_.
 // Otherwise, it needs KC_*
-[BASE] = KEYMAP(  // layer 0 : default
+[BASE] = LAYOUT_ergodox(  // layer 0 : default
         // left hand
         KC_ESC,          KC_1,    KC_2,    KC_3,    KC_4,    KC_5, KC_NO,
         KC_TAB,          KC_Q,    KC_W,    KC_E,    KC_R,    KC_T, TG(SYMB),
@@ -51,7 +51,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
         KC_LALT, CTL_T(KC_ESC),
         KC_PGUP,
-        KC_PGDN, KC_SPC,        LT(SYMB, KC_ENT)
+        KC_PGDN, KC_SPC,        LT(MOUS, KC_ENT)
     ),
 /* Keymap 1: Symbol Layer
  *
@@ -75,7 +75,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `--------------------'
  */
 // SYMBOLS
-[SYMB] = KEYMAP(
+[SYMB] = LAYOUT_ergodox(
        // left hand
        KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_TRNS,
        KC_TRNS, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_TRNS,
@@ -120,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `--------------------'
  */
 // MOUSE
-[MOUS] = KEYMAP(
+[MOUS] = LAYOUT_ergodox(
        // left hand
        KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
        KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
