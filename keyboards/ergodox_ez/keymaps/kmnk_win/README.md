@@ -10,6 +10,5 @@ $ git merge upstream/master
 ## Build
 
 ```
-$ cd keyboards/ergodox_ez
 $ make keyboard=ergodox_ez keymap=kmnk_win
 ```
